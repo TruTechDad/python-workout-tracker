@@ -1,0 +1,12 @@
+[
+    {
+        "exercise": "Bench Press",
+        "weight": "225",
+        "reps": "5"
+    },
+    {
+        "exercise": "Squats",
+        "weight": "225",
+        "reps": "8"
+    }
+]
