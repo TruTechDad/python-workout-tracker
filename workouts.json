@@ -1,12 +1,1 @@
-[
-    {
-        "exercise": "Bench Press",
-        "weight": "225",
-        "reps": "5"
-    },
-    {
-        "exercise": "Squats",
-        "weight": "225",
-        "reps": "8"
-    }
-]
+[{"exercise": "Bench Press", "weight": "225", "reps": "5"}, {"exercise": "Squats", "weight": "225", "reps": "8"}, {"exercise": "Incline press", "weight": "135", "reps": "12"}, {"exercise": "Deline press", "weight": "225", "reps": "5"}, {"exercise": "Bench press", "weight": "315", "reps": "1"}]

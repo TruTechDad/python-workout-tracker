@@ -10,26 +10,45 @@ except FileNotFoundError:
     workouts = []
 
 while True:
-    exercise = input("\nEnter exercise (or type 'q' to quit): ")
+    print("\nWhat would you like to do?")
+    print("1. Add Workout")
+    print("2. View Workouts")
+    print("3. Quit")
 
-    if exercise == 'q':
-        # Save workouts to a JSON file before exiting
-        with open('workouts.json', 'w') as file:
-            json.dump(workouts, file, indent=4)
+    choice = input("Enter choice: ")
 
-        print("\nWorkouts saved to file. Exiting...")
-        print("Goodbye 👋")
+    if choice == "1":
+        exercise = input("Enter exercise: ")
+        weight = input("Enter weight: ")
+        reps = input("Enter reps: ")
+
+        workout = {
+            "exercise": exercise,
+            "weight": weight,
+            "reps": reps
+        }
+
+        workouts.append(workout)
+        print("\nWorkout added:")
+
+    elif choice == "2":
+        print("\nYour Workouts:")
+
+        if len(workouts) == 0:
+            print("No workout saved.")
+        else:
+            for w in workouts:
+                print(w)
+
+    elif choice == "3":
+        with open("workouts.json", "w") as file:
+            json.dump(workouts, file)
+
+        print("Workouts saved. Goodbye!")
         break
 
-    weight = input("Enter weight: ")
-    reps = input("Enter reps: ")
+    else:
+        print("Invalid choice. Please try again.")
 
-    workout = {
-        "exercise": exercise,
-        "weight": weight,
-        "reps": reps
-    }
-
-    workouts.append(workout)
-
-    print("\nWorkout Saved!")
+    
+   
