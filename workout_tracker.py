@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 print("Welcome to your Workout Tracker 💪")
 
@@ -25,7 +26,8 @@ while True:
         workout = {
             "exercise": exercise,
             "weight": weight,
-            "reps": reps
+            "reps": reps,
+            "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
 
         workouts.append(workout)
@@ -37,8 +39,9 @@ while True:
         if len(workouts) == 0:
             print("No workout saved.")
         else:
-            for w in workouts:
-                print(w)
+            for i, w in enumerate(workouts, start=1):
+                date = w.get('date', 'No date')
+            print(f"{i}. {w['exercise']} - {w['weight']} lbs x {w['reps']} reps ({date})")
 
     elif choice == "3":
         with open("workouts.json", "w") as file:
