@@ -14,7 +14,8 @@ while True:
     print("\nWhat would you like to do?")
     print("1. Add Workout")
     print("2. View Workouts")
-    print("3. Quit")
+    print("3. Delete Workout")
+    print("4. Quit")
 
     choice = input("Enter choice: ")
 
@@ -44,14 +45,39 @@ while True:
             print(f"{i}. {w['exercise']} - {w['weight']} lbs x {w['reps']} reps ({date})")
 
     elif choice == "3":
-        with open("workouts.json", "w") as file:
+        print("\nSelect a workout to delete:")
+
+        if len(workouts) == 0:
+            print("No workout to delete.")
+        else:
+            for i, w in enumerate(workouts, start=1):
+                date = w.get('date', 'No date')
+                print(f"{i}. {w['exercise']} - {w['weight']} lbs x {w['reps']} reps ({date})")
+
+                try:
+                    delete_index = int(input("Enter the number of the workout to delete: ")) - 1
+                except ValueError:
+                    print("Please enter a valid number.")
+                    continue
+
+                if 0 <= delete_index < len(workouts):
+                    removed = workouts.pop(delete_index)
+                    print(f"Deleted: {removed['exercise']}")
+                else:
+                    print("Invalid number.")
+    elif choice == "4":
+        with open('workouts.json', 'w') as file:
             json.dump(workouts, file)
 
-        print("Workouts saved. Goodbye!")
-        break
+            print("💾 Workouts saved. Goodbye 👋")
+            break
 
     else:
-        print("Invalid choice. Please try again.")
+        print("❌ Invalid choice. Try again.")
+
+    
+
+    
 
     
    
