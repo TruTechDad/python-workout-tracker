@@ -1,7 +1,9 @@
+from flask_cors import CORS
 from flask import Flask, jsonify, request
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 #Load workouts from file
 def load_workouts():

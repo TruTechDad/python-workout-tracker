@@ -3,7 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Workout Tracker</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Workout Tracker</h1>
+    <h2>Add Workout</h2>
+    <input id="exercise" placeholder="Exercise" />
+    <input id="weight" placeholder="Weight" />
+    <input id="reps" placeholder="Reps" />
+    <button onclick="addWorkout()">Add Workout</button>
+
+    <h2>Workouts</h2>
+    <ul id="workoutList"></ul>
+
+    <script>
+      async function loadWorkouts() {
+        const res = await fetch("http://127.0.0.1:5000/workouts");
+        const data = await res.json();
+
+        const list = document.getElementById("workoutList");
+        list.innerHTML = "";
+
+        data.forEach((w) => {
+          const li = document.createElement("li");
+          li.textContent = `${w.exercise}: ${w.weight} lbs x ${w.reps} reps`;
+          list.appendChild(li);
+        });
+      }
+
+      async function addWorkout() {
+        const exercise = document.getElementById("exercise").value;
+        const weight = document.getElementById("weight").value;
+        const reps = document.getElementById("reps").value;
+
+        await fetch("http://127.0.0.1:5000/workouts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ exercise, weight, reps }),
+        });
+
+        loadWorkouts();
+      }
+      loadWorkouts();
+    </script>
+  </body>
 </html>
