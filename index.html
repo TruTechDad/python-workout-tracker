@@ -16,6 +16,41 @@
     <h2>Workouts</h2>
     <ul id="workoutList"></ul>
 
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      input {
+        margin: 5px;
+        padding: 8px;
+      }
+
+      button {
+        margin-left: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      li {
+        margin: 10px 0;
+        background: white;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+
     <script>
       async function loadWorkouts() {
         const res = await fetch("http://127.0.0.1:5000/workouts");
