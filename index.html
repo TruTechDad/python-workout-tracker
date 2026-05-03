@@ -24,9 +24,28 @@
         const list = document.getElementById("workoutList");
         list.innerHTML = "";
 
-        data.forEach((w) => {
+        data.forEach((w, index) => {
           const li = document.createElement("li");
           li.textContent = `${w.exercise}: ${w.weight} lbs x ${w.reps} reps`;
+          const btn = document.createElement("button");
+          btn.textContent = "Delete";
+
+          // 👇 DEBUG GOES RIGHT HERE
+
+          btn.onclick = async () => {
+            console.log("Deleting index:", index);
+
+            const res = await fetch(`http://127.0.0.1:5000/workouts/${index}`, {
+              method: "DELETE",
+            });
+
+            console.log("Response status:", res.status);
+
+            loadWorkouts();
+          };
+
+          li.appendChild(btn);
+
           list.appendChild(li);
         });
       }

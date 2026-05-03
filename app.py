@@ -44,5 +44,18 @@ def add_workout():
 
     return jsonify({"message": "Workout added!"})
 
+#Delete all workouts
+@app.route("/workouts/<int:index>", methods=["DELETE"])
+def delete_workout(index):
+    workout = load_workouts()
+
+    if 0 <= index < len(workout):
+        removed_workout = workout.pop(index)
+        save_workouts(workout)
+        return jsonify({"message": "Deleted workout", "workout": removed_workout})
+    else:
+        return jsonify({"error": "Invalid index"}), 400
+
+
 if __name__ == "__main__":
     app.run(debug=True)
