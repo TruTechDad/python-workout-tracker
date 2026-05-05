@@ -96,6 +96,10 @@ function App() {
           >
             <span>
               {w.exercise} - {w.weight} lbs x {w.reps}
+              <br />
+              <small style={{ color: "gray" }}>
+                {w.date ? w.date : "No date"}
+              </small>
             </span>
             <button onClick={() => deleteWorkout(index)}>Delete</button>
           </li>

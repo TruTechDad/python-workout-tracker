@@ -33,11 +33,14 @@ def add_workout():
 
     data = request.json
 
+    from datetime import datetime
+
     workout = {
-        "exercise": data["exercise"],
-        "weight": data["weight"],
-        "reps": data["reps"]
-    }
+    "exercise": data["exercise"],
+    "weight": data["weight"],
+    "reps": data["reps"],
+    "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+}
 
     workouts.append(workout)
     save_workouts(workouts)
