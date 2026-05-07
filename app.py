@@ -58,7 +58,33 @@ def delete_workout(index):
         return jsonify({"message": "Deleted workout", "workout": removed_workout})
     else:
         return jsonify({"error": "Invalid index"}), 400
+    
+
+@app.route("/generate", methods=["GET"])
+def generate_workout():
+
+    workout_plan = [
+        {
+            "exercise": "Bench Press",
+            "sets": 4,
+            "reps": 8
+        },
+        {
+            "exercise": "Squats",
+            "sets": 4,
+            "reps": 10
+        },
+        {
+            "exercise": "Pull Ups",
+            "sets": 3,
+            "reps": 12
+        }
+    ]
+
+    return jsonify(workout_plan)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+

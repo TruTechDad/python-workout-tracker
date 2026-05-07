@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
+  const [generatedWorkout, setGeneratedWorkout] = useState([]);
   const [exercise, setExercise] = useState("");
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
@@ -38,6 +39,13 @@ function App() {
     });
 
     loadWorkouts();
+  };
+
+  const generateWorkout = async () => {
+    const res = await fetch("http://127.0.0.1:5000/generate");
+    const data = await res.json();
+
+    setGeneratedWorkout(data);
   };
 
   return (
@@ -78,6 +86,18 @@ function App() {
           Add Workout
         </button>
       </div>
+
+      <button onClick={generateWorkout}>Generate Workout Plan 🤖</button>
+
+      <h2>AI Workout Plan</h2>
+
+      <ul>
+        {generatedWorkout.map((w, index) => (
+          <li key={index}>
+            {w.exercise} - {w.sets} sets x {w.reps} reps
+          </li>
+        ))}
+      </ul>
 
       <h2>Your Workouts</h2>
 
