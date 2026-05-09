@@ -1,3 +1,4 @@
+import "./App.css";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -47,6 +48,11 @@ function App() {
 
     setGeneratedWorkout(data);
   };
+
+  const totalWeight = workouts.reduce((total, workout) => {
+    const weight = parseInt(workout.weight) || 0;
+    return total + weight;
+  }, 0);
 
   return (
     <div
@@ -98,6 +104,11 @@ function App() {
           </li>
         ))}
       </ul>
+
+      <h2>Workout Analytics 📊</h2>
+
+      <p>Total Workouts Logged: {workouts.length}</p>
+      <p>Total Weight Logged: {totalWeight} lbs</p>
 
       <h2>Your Workouts</h2>
 
