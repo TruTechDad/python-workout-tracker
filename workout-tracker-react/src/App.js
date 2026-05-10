@@ -1,5 +1,13 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
@@ -53,6 +61,12 @@ function App() {
     const weight = parseInt(workout.weight) || 0;
     return total + weight;
   }, 0);
+
+  const chartData = workouts.map((w, index) => ({
+    name: w.exercise,
+    weight: parseInt(w.weight) || 0,
+    index: index + 1,
+  }));
 
   return (
     <div
@@ -109,6 +123,19 @@ function App() {
 
       <p>Total Workouts Logged: {workouts.length}</p>
       <p>Total Weight Logged: {totalWeight} lbs</p>
+
+      <h2>Progress Chart 📊</h2>
+
+      <div style={{ width: "100%", height: 300 }}>
+        <ResponsiveContainer>
+          <BarChart data={chartData}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="weight" fill="#4cafef" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
 
       <h2>Your Workouts</h2>
 
