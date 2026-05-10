@@ -17,7 +17,9 @@ function App() {
   const [reps, setReps] = useState("");
 
   const loadWorkouts = async () => {
-    const res = await fetch("http://127.0.0.1:5000/workouts");
+    const res = await fetch(
+      "https://python-workout-tracker-2.onrender.com/workouts",
+    );
     const data = await res.json();
     setWorkouts(data);
   };
@@ -27,7 +29,7 @@ function App() {
   }, []);
 
   const addWorkout = async () => {
-    await fetch("http://127.0.0.1:5000/workouts", {
+    await fetch("https://python-workout-tracker-2.onrender.com/workouts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,15 +45,20 @@ function App() {
   };
 
   const deleteWorkout = async (index) => {
-    await fetch(`http://127.0.0.1:5000/workouts/${index}`, {
-      method: "DELETE",
-    });
+    await fetch(
+      `https://python-workout-tracker-2.onrender.com/workouts/${index}`,
+      {
+        method: "DELETE",
+      },
+    );
 
     loadWorkouts();
   };
 
   const generateWorkout = async () => {
-    const res = await fetch("http://127.0.0.1:5000/generate");
+    const res = await fetch(
+      "https://python-workout-tracker-2.onrender.com/generate",
+    );
     const data = await res.json();
 
     setGeneratedWorkout(data);
